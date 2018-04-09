@@ -1,0 +1,29 @@
+{
+    "name": "rtconner/freshbooks-api",
+    "description": "Wrapper to the FreshBooks API",
+    "license": "MIT",
+	"keywords": ["freshbooks", "api"],
+    "authors": [
+        {
+            "name": "jboesch",
+            "homepage": "https://github.com/jboesch/FreshBooksRequest-PHP-API"
+        },
+        {
+            "name": "JasonReading",
+            "homepage": "http://jasonreading.com"
+        },
+        {
+            "name": "Robert Conner",
+            "homepage": "http://smartersoftware.net"
+        }
+    ],
+	"require": {
+		"php": ">=5.3.0",
+		"ext-curl": "*"
+	},
+    "autoload": {
+        "psr-0": {
+            "Freshbooks\\": "src\/"
+        }
+    }
+}
