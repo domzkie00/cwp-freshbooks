@@ -18,7 +18,7 @@ class Clients_WP_FreshBooks{
         add_action('admin_init', array($this, 'register_integration'));
         add_action('admin_enqueue_scripts', array( $this, 'cwp_freshbooks_add_admin_scripts' ));
         add_action('wp_enqueue_scripts', array($this, 'cwp_freshbooks_add_wp_scripts'), 20, 1);
-        add_filter('the_content', array($this, 'folder_content_table'), 6);
+        add_filter('the_content', array($this, 'folder_content_table'));
     }
 
     public function cwp_freshbooks_add_admin_scripts() {
@@ -102,6 +102,7 @@ class Clients_WP_FreshBooks{
         global $pages;
 
         foreach($pages as $page) {
+            $page_content = nl2br($page);
             if (strpos($page, '[cwp_') !== FALSE) {
                 $args = array(
                     'meta_key' => '_clients_page_shortcode',
@@ -162,13 +163,17 @@ class Clients_WP_FreshBooks{
                                         $estimates = $estimates_result['estimates'];
                                     }
 
+                                    ob_start();
                                     include_once(CWPFB_PATH_INCLUDES . '/cwp-freshbooks-table.php');
+                                    $page_content .= ob_get_clean();
                                 }
                             }
                         }
                     }
                 }
             }
+
+            return $page_content;
         }
     }
 }
